@@ -1,30 +1,31 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const routes = require('./routes/routes');
-require('dotenv').config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const routes = require("./routes/routes");
+require("dotenv").config();
 
-const mongoString = process.env.DATABASE_URL
+const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
-const database = mongoose.connection
+const database = mongoose.connection;
 
-const app = express()
+const app = express();
 const port = 3000;
 
-const jsonParser = bodyParser.json();
-const urlEncodedParser = bodyParser.urlencoded({extended:false})
+// const jsonParser = bodyParser.json();
+// const urlEncodedParser = bodyParser.urlencoded({extended:false})
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use("/api", routes);
 
-app.use(bodyParser.json())
-app.use('/api', routes)
-
-database.on('error', (error) => {
-  console.log(error)
+database.on("error", (error) => {
+  console.log(error);
 });
 
-database.once('connected', () => { // will only run once (1x) and once it is connected
-  console.log('Database Connected');
-})
+database.once("connected", () => {
+  // will only run once (1x) and once it is connected
+  console.log("Database Connected");
+});
 
-
-
-app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))
+app.listen(port, () =>
+  console.log(`Hello world app listening on port ${port}!`)
+);

@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const dataSchema = new mongoose.Schema({
-  ImageLink: {String},
-  Name: {String},
-  FunctionalGroup: [String],
-  Difficulty: {String},
-})
+  ImageLink: String,
+  Name: String,
+  FunctionalGroup: { type: [String], default: undefined },
+  Difficulty: String,
+});
 
-module.exports = mongoose.model('Data', dataSchema)
+module.exports = mongoose.model("Data", dataSchema);
