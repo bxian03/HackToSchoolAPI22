@@ -16,31 +16,23 @@ router.post("/post", async (req, res) => {
 
 //Get all Method
 router.get("/getAll", async (req, res) => {
-  // test if works
-
+  // works 4:05 pm
   try {
-    const data = await model.find();
+    const data = await Model.find();
     res.json(data);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 
 //Get by ID Method
 router.get("/getOne/:id", async (req, res) => {
   // ignore for now
-
-  const question = new model({
-    ImageLink: req.body.ImageLink,
-    Name: req.body.Name,
-    FunctionalGroup: req.body.FunctionalGroup,
-    Difficulty: req.body.Difficulty,
-  });
   try {
-    const newQuestion = await question.save();
-    res.status(201).json(newQuestion);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+    const data = await Model.findById(req.params.id);
+    res.json(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 
