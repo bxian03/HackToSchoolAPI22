@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const dataSchema = new mongoose.Schema({
-  ImageLink: { type: String, required: true, lowercase: true },
+  ImageLink: { type: String, required: true },
   Name: { type: String, required: true, lowercase: true },
   FunctionalGroup: {
     type: [String],
