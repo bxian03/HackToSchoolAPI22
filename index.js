@@ -18,10 +18,6 @@ database.once('connected', () => { // will only run once (1x) and once it is con
   console.log('Database Connected');
 })
 
-app.get('/', (req, res) => {
-  res.send('Hello World, from express');
-});
-
 app.use('/api', routes)
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))
