@@ -6,3 +6,5 @@ const dataSchema = new mongoose.Schema({
   FunctionalGroup: { type: Array, required: true, default: [] },
   Difficulty: { type: String, required: true },
 });
+
+module.exports = mongoose.model('Data', dataSchema);
