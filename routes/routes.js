@@ -5,8 +5,8 @@ const router = express.Router();
 
 //Post Method
 router.post("/post", async (req, res) => {
-  const data = await Model.create(req.body);
   try {
+    const data = await Model.create(req.body);
     const dataToSave = await data.save();
     res.status(200).json(dataToSave);
   } catch (error) {
