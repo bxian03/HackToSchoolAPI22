@@ -1,12 +1,28 @@
 const express = require('express');
-const model = require('../models/model');
+const Model = require('../models/model');
 
 const router = express.Router()
 
 //Post Method
-router.post('/post', (req, res) => {
-  res.send('Post API')
-})
+router.post('/post', async (req, res) => {
+  console.log(typeof req.body.FunctionalGroup)
+  console.log(req.body.FunctionalGroup)
+  const data = new Model(
+  {
+    ImageLink: req.body.ImageLink,  
+    Name: req.body.Name,
+    FunctionalGroup: [req.body.FunctionalGroup],
+    Difficulty: req.body.Difficulty
+  }
+  )
+  try {
+    const dataToSave = await  data.save();
+    res.status(200).json(dataToSave)
+  }
+  catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+});
 
 //Get all Method
 router.get('/getAll', async (req, res) => { // test if works
