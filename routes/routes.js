@@ -25,16 +25,14 @@ router.get("/organic_compounds", async (req, res) => {
   }
 });
 
-//Get by ID Method
+//Get by Difficulty Method // working 5:26pm
 router.get("/organic_compounds/:id", async (req, res) => {
-  // ignore for now
-  try {
-    const data = await Model.findById(req.params.id);
-    res.json(data);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  const id = req.params.id
+  let dicts = await Model.find({Difficulty: id});
+
+  res.json(dicts)
   }
-});
+);
 
 //Update by ID Method
 router.patch("/organic_compounds/:id", (req, res) => {
