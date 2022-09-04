@@ -19,7 +19,7 @@ router.get("/organic_compounds", async (req, res) => {
   // works 4:05 pm
   try {
     const data = await Model.find();
-    await Model.res.json(data);
+    res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
