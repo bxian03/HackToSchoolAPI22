@@ -27,25 +27,34 @@ router.get("/organic_compounds", async (req, res) => {
 
 //Get by Difficulty Method // working 5:26pm
 router.get("/organic_compounds/:id", async (req, res) => {
-  const id = req.params.id
-  let dicts = await Model.find({Difficulty: id});
+  const id = req.params.id;
+  let dicts = await Model.find({ Difficulty: id });
 
-  res.json(dicts)
-  }
-);
+  res.json(dicts);
+});
 
 //Update by ID Method
-router.patch("/organic_compounds/:id", (req, res) => {
-  res.send("Update by ID API");
+router.patch("/organic_compounds/:id", async (req, res) => {
+  try {
+    data = await Model.findByIdAndUpdate(req.params.id, {
+      ImageLink: req.body.ImageLink,
+      Name: req.body.Name,
+      FunctionalGroup: req.body.FunctionalGroup,
+      Difficulty: req.body.Difficulty,
+    });
+    res.json(data).status(200);
+  } catch (error) {
+    res.json(error).status(400);
+  }
 });
 
 //Delete by ID Method
 router.delete("/organic_compounds/:id", async (req, res) => {
   try {
-    const data = await Model.findByIdAndDelete(req.params.id)
-    res.json(data).status(200)
+    const data = await Model.findByIdAndDelete(req.params.id);
+    res.json(data).status(200);
   } catch (error) {
-    res.json().status(400)
+    res.json().status(400);
   }
 });
 
