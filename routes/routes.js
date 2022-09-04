@@ -43,7 +43,12 @@ router.patch("/organic_compounds/:id", (req, res) => {
 
 //Delete by ID Method
 router.delete("/organic_compounds/:id", (req, res) => {
-  res.send("Delete by ID API");
+  try {
+    const data = await Model.findByIdAndDelete(req.params.id)
+    res.json(data).status(200)
+  } catch (error) {
+    res.json().status(400)
+  }
 });
 
 module.exports = router;
