@@ -40,7 +40,7 @@ router.patch("/organic_compounds/:id", (req, res) => {
 });
 
 //Delete by ID Method
-router.delete("/organic_compounds/:id", (req, res) => {
+router.delete("/organic_compounds/:id", async (req, res) => {
   try {
     const data = await Model.findByIdAndDelete(req.params.id)
     res.json(data).status(200)
